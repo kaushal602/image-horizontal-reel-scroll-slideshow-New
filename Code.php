@@ -26,3 +26,29 @@ Photo Gallery
       </div>
   </div>
 <?php } ?>
+
+
+// Get Blog
+// get page description
+<?php
+  $post_7 = get_post(7); 
+  $excerpt = $post_7->post_excerpt;
+  echo $excerpt
+?>
+<?php
+  $args = array(
+      'posts_per_page'   => 3,
+      'offset'           => 0,
+      'orderby'          => 'date',
+      'order'            => 'DESC',
+      'post_type'        => 'blog',
+      'author_name'      => '',
+      'post_status'      => 'publish',
+      'suppress_filters' => true 
+  );
+  $posts_array = get_posts( $args );
+  ?>
+  <?php foreach ( $posts_array as $recent_post ) { 
+      $post_title = $recent_post->post_title;
+      $post_image = wp_get_attachment_url( get_post_thumbnail_id($recent_post->ID), 'thumbnail' );
+  } ?>
